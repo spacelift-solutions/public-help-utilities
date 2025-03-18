@@ -66,7 +66,7 @@ def call_api(uri, check_data=None, data=None, err: CustomError = None):
             resp = json.loads(response.read().decode('utf-8'))
 
         if check_data is not None:
-            def ensure_data(resp, check):
+            def ensure_data(_resp, check):
                 # Create an array of keys
                 keys = [s for s in check.split(".?") if s]
                 if len(keys) == 0:
@@ -74,13 +74,13 @@ def call_api(uri, check_data=None, data=None, err: CustomError = None):
 
                 # Ensure the first key exists in the response
                 this_key = keys[0]
-                if this_key not in resp:
+                if this_key not in _resp:
                     err.code = f"{err.code}_{this_key.upper()}_MISSING"
-                    err.dump = resp
+                    err.dump = resp # Keep this as the main resp for the error
                     err(uri)
                 # Delete the first key from the array and call ensure_data again
                 del keys[0]
-                ensure_data(resp[this_key], '.?'.join(keys))
+                ensure_data(_resp[this_key], '.?'.join(keys))
             ensure_data(resp, check_data)
 
         return resp
