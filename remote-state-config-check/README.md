@@ -3,6 +3,8 @@
 Spacelift supports External State access, see our docs [here](https://docs.spacelift.io/vendors/terraform/external-state-access.html) to read more on it.
 Sometimes, configuring this can be tricky. This script will tell you what is wrong with your configuration (hopefully).
 
+[Heres](https://support.spacelift.io/articles/9582913392-resolving-cannot-create-a-workspace-error-when-accessing-external-state) a useful help article on the topic as well.
+
 ### Pre-requisites
 
 - Python 3.x or later
