@@ -22,9 +22,9 @@ This script:
 
 ## Usage
 
-```bash
-python spacelift_update.py
-```
+   ```bash
+   python spacelift_update.py
+   ```
 
 ## Customization
 
