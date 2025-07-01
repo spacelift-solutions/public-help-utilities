@@ -1,41 +1,88 @@
-# Spacelift Stack Update Script
+# Spacelift Stack Bulk Update Tool
 
-A Python script to bulk update all Spacelift stacks in your environment with standardized configurations.
+A Python script for bulk updating Spacelift stacks
 
-## What It Does
+## Prerequisites
 
-This script:
+- Python 3.6 or higher
 
-1. Updates each stack with standardized settings while preserving stack-specific data
-2. Provides logging for success/failure tracking
-3. Continues processing even if individual stacks fail
+## Environment Variables
 
-## Setup
+Set the following environment variables before running the script:
 
-1. Install dependencies:
+```bash
+export SPACELIFT_DOMAIN="your-spacelift-domain"
+export SPACELIFT_API_KEY_ID="your-api-key-id"
+export SPACELIFT_API_KEY_SECRET="your-api-key-secret"
+```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Configuration
 
-2. Update the `CONFIG` dictionary with whatever settings you'd like to update across all stacks
+The script uses a `CONFIG` dictionary to define update settings.
+
+Example configuration in the script:
+
+```python
+CONFIG = {
+    "worker_pool": "your-worker-pool-id",
+    # Add other settings as needed
+}
+```
 
 ## Usage
 
-   ```bash
-   python spacelift_update.py
-   ```
+1. Set your environment variables
+2. Configure the `CONFIG` dictionary with desired settings
+3. Run the script:
 
-## Customization
+```bash
+python update_stacks.py
+```
 
-Modify the `variables` dictionary to change what gets updated on each stack.
+## What It Does
 
-## Security
+1. **Authentication**: Obtains a JWT token using your API credentials
+2. **Stack Discovery**: Fetches all stacks from your Spacelift organization
+3. **Stack Details**: Retrieves current configuration for each stack
+4. **Bulk Update**: Updates each stack with new configuration while preserving existing settings
+5. **Reporting**: Provides summary of successful and failed updates
 
-- API tokens handled securely through separate auth module
-- No sensitive data logged
-- Minimal required permissions recommended
+## Current Update Operations
+
+The script currently performs these updates on each stack:
+
+- Assigns a new worker pool
+- Updates Terraform workflow tool to OpenTofu
+- Preserves all existing stack settings (branch, repository, namespace, etc.)
 
 ## Limitations
 
-- This script only works for Terraform/OpenTofu stacks
+- **Terraform stacks only**: This script only works with terraform stacks
+
+## Customization
+
+To customize what gets updated:
+
+1. Modify the `CONFIG` dictionary with your desired settings
+2. Add or remove fields as needed for your use case
+3. run the script
+
+## Troubleshooting
+
+- Ensure environment variables are set correctly
+- Verify API key permissions
+- Check Spacelift domain configuration
+- Review logs for specific error messages
+- Validate worker pool IDs exist in your organization
+
+## Example Output
+
+```
+INFO:__main__:Found 25 stacks to update
+INFO:__main__:Updating stack: stack-1...
+INFO:__main__:Successfully updated stack: stack-1
+INFO:__main__:Updating stack: stack-2...
+INFO:__main__:Successfully updated stack: stack-2
+...
+INFO:__main__:Update complete: 23 successful, 2 failed
+```
