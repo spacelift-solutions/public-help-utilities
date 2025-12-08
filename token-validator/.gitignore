@@ -1,0 +1,11 @@
+# Compiled binary
+token-validator
+
+# Go build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test coverage
+*.out
