@@ -10,8 +10,8 @@ logger = logging.getLogger(__name__)
 
 CONFIG = {
     "spacelift_url": os.environ.get("SPACELIFT_ENDPOINT") if os.environ.get("SPACELIFT_ENDPOINT", False) else logger.error("SPACELIFT_ENDPOINT environment variable is not set. Please set it to your Spacelift API endpoint."),
-    "spacelift_api_key_id": f"{os.environ.get("SPACELIFT_API_KEY_ID")}" if os.environ.get("SPACELIFT_API_KEY_ID", False) else logger.error("SPACELIFT_API_KEY_ID environment variable is not set. Please set it to your Spacelift API Key ID."),
-    "spacelift_api_key_secret": f"{os.environ.get("SPACELIFT_API_KEY_SECRET")}" if os.environ.get("SPACELIFT_API_KEY_SECRET", False) else logger.error("SPACELIFT_API_KEY_SECRET environment variable is not set. Please set it to your Spacelift API Key Secret."),
+    "spacelift_api_key_id": os.environ.get("SPACELIFT_API_KEY_ID") if os.environ.get("SPACELIFT_API_KEY_ID", False) else logger.error("SPACELIFT_API_KEY_ID environment variable is not set. Please set it to your Spacelift API Key ID."),
+    "spacelift_api_key_secret": os.environ.get("SPACELIFT_API_KEY_SECRET") if os.environ.get("SPACELIFT_API_KEY_SECRET", False) else logger.error("SPACELIFT_API_KEY_SECRET environment variable is not set. Please set it to your Spacelift API Key Secret."),
 }
 
 QUERIES = {
